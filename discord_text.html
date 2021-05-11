@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>放送部Discord 文字列変換</title>
+</head>
+<body>
+	<h1>放送部Discord 文字列変換</h1>
+	<p>
+		入力：<br/>
+		<textarea id="input_textarea" value="1" cols="50" rows=5>おちんちん放送部</textarea><br/>
+		<input type="button" value="設定" onclick="setValue()"/>
+		<input type="button" value="設定（濁点有）" onclick="setValueAll()"/>
+		<input type="button" value="クリア" onclick="Clear()"/>
+		<br/>
+		<br/>
+		出力：<br/>
+		<textarea id="output_textarea" value="1" cols="50" rows=5></textarea><br/>
+		<input type="button" value="コピー" onclick="Copy()"/>
+	</p>
+
+	<script>
+		var ary = [
+			['あ', ':a_:' ],
+			['い', ':i_:'],
+			['う', ':u_:'],
+			['え', ':e_:'],
+			['お', ':o_:'],
+			['ぃ', ':i_s:'],
+			['か', ':ka:'],
+			['き', ':ki:'],
+			['く', ':ku:'],
+			['こ', ':ko:'],
+			['し', ':shi:'],
+			['す', ':su:'],
+			['じ', ':ji:'],
+			['ぞ', ':zo:'],
+			['た', ':ta:'],
+			['ち', ':chi:'],
+			['つ', ':tsu:'],
+			['と', ':to:'],
+			['っ', ':tsu_s:'],
+			['の', ':no:'],
+			['ふ', ':fu:'],
+			['ほ', ':ho:'],
+			['ぶ', ':bu:'],
+			['ぽ', ':po:'],
+			['ま', ':ma:'],
+			['も', ':mo:'],
+			['や', ':ya:'],
+			['ゅ', ':yu_s:'],
+			['ょ', ':yo_s:'],
+			['り', ':ru:'],
+			['る', ':ro:'],
+			['ろ', ':ri:'],
+			['わ', ':wa:'],
+			['ん', ':nn:'],
+			['ー', ':long:'],
+			['゛', ':dakuten:'],
+			['奈', ':k_na:'],
+			['良', ':k_ra:'],
+			['高', ':k_kou:'],
+			['専', ':k_sen:'],
+			['放', ':k_hou:'],
+			['送', ':k_sou:'],
+			['部', ':k_bu:'],
+			['教', ':k_kyou:'],
+			['授', ':k_jyu:'],
+			['卍', ':manji:']
+		];
+		
+		var aryAllVal = [
+			['ゔ', ':u_::dakuten:' ],
+			['が', ':ka::dakuten:' ],
+			['ぎ', ':ki::dakuten:' ],
+			['ぐ', ':ku::dakuten:' ],
+			['げ', ':ke::dakuten:' ],
+			['ご', ':ko::dakuten:' ],
+			['し', ':shi::dakuten:' ],
+			['す', ':su::dakuten:' ],
+			['だ', ':ta::dakuten:' ],
+			['ぢ', ':chi::dakuten:' ],
+			['づ', ':tsu::dakuten:' ],
+			['ど', ':to::dakuten:' ],
+			['ほ', ':ho::dakuten:' ],
+		];
+
+		function setValue(){
+			// 値を取得
+			var input = document.getElementById("input_textarea").value;
+			var output = setText(input);
+			document.getElementById("output_textarea").value = output;
+		}
+		
+		function setValueAll(){
+			// 値を取得
+			var input = document.getElementById("input_textarea").value;
+			var output = setTextAll(input);
+			document.getElementById("output_textarea").value = output;
+		}
+
+		function Clear(){
+			document.getElementById("input_textarea").value = "";
+			document.getElementById("output_textarea").value = "";
+		}
+		
+		function Copy(){
+			
+			document.getElementById("output_textarea").select();
+			document.execCommand("copy");
+		}
+
+		function setText(string){
+			ary.forEach(record => {
+				var targetStr = record[0];
+				var regExp = new RegExp( targetStr, "g" ) ;
+				string = string.replace( regExp , record[1] ) ;
+			});
+			return string;
+		}
+		
+		function setTextAll(string){
+			ary.forEach(record => {
+				var targetStr = record[0];
+				var regExp = new RegExp( targetStr, "g" ) ;
+				string = string.replace( regExp , record[1] ) ;
+			});
+			
+			aryAllVal.forEach(record => {
+				var targetStr = record[0];
+				var regExp = new RegExp( targetStr, "g" ) ;
+				string = string.replace( regExp , record[1] ) ;
+			});
+			return string;
+		}
+	</script>
+</body>
+</html>
